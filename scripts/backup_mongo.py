@@ -14,6 +14,9 @@ from boto.exception import S3CreateError, S3DataError, S3PermissionsError, S3Res
 backup_path = '/home/ubuntu/backups'
 #backup_path = '/Users/andrewmahon/backups/'
 
+log_file = '/home/ubuntu/var/logs/backup.log'
+#log_file = '/Users/andrewmahon/var/logs/backup.log'
+
 host_name = 'tc-dev'
 #db_name = 'its_almost'
 db_name = None
@@ -116,4 +119,8 @@ def upload_to_s3(source_filename, target_bucket, target_key):
     return False
   return True
 
-main()
+try:
+  main()
+except:
+  echo "Nightly Backup Failed" >> /tmp/mybackup.log
+echo "Nightly Backup Successful: $(date)" >> /tmp/mybackup.log
