@@ -122,6 +122,6 @@ def upload_to_s3(source_filename, target_bucket, target_key):
 try:
   main()
 except:
-  echo "Nightly Backup Failed" >> log_file
+  subprocess.call(['echo "Nightly Backup Failed" >> log_file'])
   return
-echo "Nightly Backup Successful: $(date)" >> log_file
+subprocess.call(['echo "Nightly Backup Success" >> log_file'])
