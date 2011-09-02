@@ -2,7 +2,10 @@
 
 import sys, os, subprocess, datetime, gzip, tarfile, shutil
 
-sys.path.append("./lib")
+cmd_folder = os.path.dirname(os.path.abspath(__file__))+'/lib/'
+if cmd_folder not in sys.path:
+  sys.path.insert(0, cmd_folder)
+
 import boto
 from boto.s3.connection import S3Connection
 from boto.s3.key import Key
