@@ -2,14 +2,14 @@
 
 import sys, os, subprocess, datetime, gzip, tarfile, shutil
 
-sys.path.append("lib")
+sys.path.append("./lib")
 import boto
 from boto.s3.connection import S3Connection
 from boto.s3.key import Key
 from boto.exception import S3CreateError, S3DataError, S3PermissionsError, S3ResponseError
 
-#backup_path = '/home/ubuntu/backups'
-backup_path = '/Users/andrewmahon/backups/'
+backup_path = '/home/ubuntu/backups'
+#backup_path = '/Users/andrewmahon/backups/'
 
 host_name = 'tc-dev'
 #db_name = 'its_almost'
