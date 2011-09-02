@@ -1,6 +1,6 @@
 #! /usr/bin/env python2.7
 
-import sys, os, subprocess, datetime, gzip, tarfile, shutil
+import sys, os, subprocess, datetime, gzip, tarfile, shutil, file
 
 cmd_folder = os.path.dirname(os.path.abspath(__file__))+'/lib/'
 if cmd_folder not in sys.path:
@@ -121,6 +121,10 @@ def upload_to_s3(source_filename, target_bucket, target_key):
 
 try:
   main()
-  subprocess.call(['echo "Nightly Backup Success" >> '+log_file])
+  status = 'success'
 except:
-  subprocess.call(['echo "Nightly Backup Failed" >> '+log_file])
+  status = 'fail'
+  
+file = open(log_file, "w")
+file.write(status)
+file.close()
