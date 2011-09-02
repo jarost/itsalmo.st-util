@@ -1,6 +1,6 @@
 #! /usr/bin/env python2.7
 
-import sys, os, subprocess, datetime, gzip, tarfile, shutil, file
+import sys, os, subprocess, datetime, gzip, tarfile, shutil
 
 cmd_folder = os.path.dirname(os.path.abspath(__file__))+'/lib/'
 if cmd_folder not in sys.path:
