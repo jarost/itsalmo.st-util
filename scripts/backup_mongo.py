@@ -14,7 +14,7 @@ from boto.exception import S3CreateError, S3DataError, S3PermissionsError, S3Res
 backup_path = '/home/ubuntu/backups'
 #backup_path = '/Users/andrewmahon/backups/'
 
-log_file = '/home/ubuntu/var/logs/backup.log'
+log_file = '/home/ubuntu/var/log/backup.log'
 #log_file = '/Users/andrewmahon/var/logs/backup.log'
 
 host_name = 'tc-dev'
