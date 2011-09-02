@@ -123,8 +123,8 @@ try:
   main()
   status = 'success'
 except:
-  status = 'fail'
+  status = 'failure'
   
-file = open(log_file, "w")
-file.write(status)
+file = open(log_file, "a")
+file.write(status + ' ' + target_key)
 file.close()
