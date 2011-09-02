@@ -21,6 +21,10 @@ host_name = 'tc-dev'
 #db_name = 'its_almost'
 db_name = None
 
+#S3 credentials
+access_key_id = None
+access_key_secret = None
+
 def main():
   print '\nMongoDB Backup Helper\n\n'
   
@@ -93,7 +97,7 @@ def upload_to_s3(source_filename, target_bucket, target_key):
     return False
     
   try:
-    c = boto.connect_s3()
+    c = S3Connection(access_key_id,access_key_secret)
     print 'Opening bucket \'' + target_bucket + '\'.'
     b = c.get_bucket(target_bucket)
     if not b:
