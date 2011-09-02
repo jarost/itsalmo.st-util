@@ -124,7 +124,4 @@ try:
   status = 'success'
 except:
   status = 'failure'
-  
-#file = open(log_file, "a")
-#file.write(status + ' ' + filename)
-#file.close()
+
