@@ -8,11 +8,12 @@ from boto.s3.connection import S3Connection
 from boto.s3.key import Key
 from boto.exception import S3CreateError, S3DataError, S3PermissionsError, S3ResponseError
 
-backup_path = '/home/ubuntu/backups'
-#backup_path = '/Users/andrewmahon/backups/'
+#backup_path = '/home/ubuntu/backups'
+backup_path = '/Users/andrewmahon/backups/'
 
 host_name = 'tc-dev'
-db_name = 'its_almost'
+#db_name = 'its_almost'
+db_name = None
 
 def main():
   print '\nMongoDB Backup Helper\n\n'
@@ -23,7 +24,10 @@ def main():
   print 'Start:   Dumping MongoDB'
   try:
     os.chdir(backup_path)
-    subprocess.call(['mongodump','-d',db_name])
+    if db_name:
+      subprocess.call(['mongodump','-d',db_name])
+    else:
+      subprocess.call(['mongodump'])
     files_to_cleanup.append('dump')
   except:
     print 'Unexpected error with mongodump'
@@ -32,9 +36,13 @@ def main():
   print 'Start:   Creating Tar'
   try:
     now = datetime.datetime.now()
-    filename = host_name + '.mongo.'+str(db_name)+'.'+str(now.month)+'.'+str(now.day)+'.'+str(now.year)+'.'+str(now.hour)+'.'+str(now.minute)+'.'+str(now.second)+'.bak.tar'
+    if db_name:
+      filename = host_name + '.mongo.'+str(db_name)+'.'+str(now.month)+'.'+str(now.day)+'.'+str(now.year)+'.'+str(now.hour)+'.'+str(now.minute)+'.'+str(now.second)+'.bak.tar'
+    else:
+      filename = host_name + '.mongo.'+str(now.month)+'.'+str(now.day)+'.'+str(now.year)+'.'+str(now.hour)+'.'+str(now.minute)+'.'+str(now.second)+'.bak.tar'
     tar = tarfile.open(filename, "w")
-    tar.add(backup_path+'dump')
+    #tar.add(backup_path+'dump')
+    tar.add('dump')
     tar.close()
     files_to_cleanup.append(''+filename)
   except:
